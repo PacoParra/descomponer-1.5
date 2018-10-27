@@ -1,0 +1,619 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\usepackage{natbib}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+
+
+% \VignetteIndexEntry{descomponer_texto}
+
+
+
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\title{AMPLITUDE DOMAIN-FEQUENCY REGRESSION }
+\author{Francisco Parra}
+\maketitle
+
+
+\vspace{1.5cm}
+
+{\bf Introduction}
+
+The time series can be seen from an aplitude-time domain or an amplitude-frequency domain. The amplitude-frecuency domain are used to analyze properties of filters used to decompose a time series into a trend, seasonal and irregular component investigating the gain function to examine the effect of a filter at a given frequency on the amplitude of a cycle for a particular time series. The ability to decompose data series into different frequencies for separate analysis and later recomposition is the first fundamental concept in the use of spectral techniques in forecasting, such as regression espectrum band, have had little development in econometric work. The low diffusion of this technique has been associated with  the computing difficulties  caused the need to work with complex numbers, and  inverse Fourier transform in order to convert everything back into real terms. But the problems from the use of the complex Fourier transform may be circumvented by carrying out the Fourier transform of the data in real terms, pre-multiplied  the time series by the orthogonal matrix Z whose elements are defined in Harvey (1978).
+
+The spectral analysis commences with the assumption that any series can be transformed into a set of sine and cosine waves, and can be used to both identify and quantify apparently nonperiodic short and long cycle processes  (first section). In  Band spectrum regression (second section) , is a brief summary  of the regression of the frequency domain  (Engle, 1974)  The application of spectral analysis to data containing both seasonal (high frequency) and non-seasonal (low frequency) components may produce adventages, since these different frequencies can be modelled separately and then may be re-combined to produce fitted values. Durbin (1967 and 1969) desing a technique for studying the general nature of the serial dependence in a satacionary time series, that can be use to statistic contraste in This type of exercises (third section). The time-varying regression, or the regression whit the vector of parameters time.varying can be understood in this context (four section). 
+
+
+
+{\bf Spectral analysis}
+
+Nerlove (1964) and Granger (1969) were the two foremost researchers on the application of spectral techniques to economic time series. 
+
+The use of spectral analysis requires a change of focus from an amplitude-time domain to an amplitude-frequency domain. Thus spectral analysis commences with the assumption that any series, {Xt}, can be transformed into a set of sine and cosine waves such as:
+
+\begin{equation}
+    X_t=\eta+\sum_{j=1}^N[a_j\cos(2\pi\frac{ft}n)+b_j\sin(2\pi\frac{ft}n)]
+    \end{equation}
+
+where $\eta$ is the mean of the series, $a_j$ and $b_j$  are the amplitude, f is the frequency over a span of n observations, t is a time index ranging from 1 to N where N is the number of periods for which we have observations, the fraction (ft/n) for different values of t converts the discrete time scale of time series into a proportion of 2 and j ranges from 1 to n where n= N/2. The highest observable frequency in the series is n/N (i.e., 0.5 cycles per time interval). High frequency dynamics (large f) are akin to short cycle processes while low frequency dynamics (small f) may be likened to long cycle processes. If we let $ \frac{ft}n=w $  then equation (1) can be re-written more compactly as:
+
+\begin{equation}
+    X_t=\eta+\sum_{j=1}^N[a_j\cos(\omega_j)+b_j\sin(\omega_j)]
+    \end{equation}
+
+Spectral analysis can be used to both identify and quantify apparently nonperiodic short and long cycle processes. A given series ${X_t}$ may contain many cycles of different frequencies and amplitudes and such combinations of frequencies and amplitudes may yield cyclical patterns which appear non-periodic with irregular amplitude. In fact, in such a time series it is clear from equation (2) that each observation can be broken down into component parts of different length cycles which, when added together (along with an error term), comprise the observation (Wilson and Perry, 2004). 
+
+The overall effect of the Fourier analysis of $N$ observation to a time date  is to partition the variability of the series into components at frequencies $\frac{2\pi}{N}$,  $\frac{4\pi}{N}$,...,$\pi$.The component at frequency $\omega_p=\frac{2\pi p}{N}$ if called the pth harmonic. For $p\neq \frac{N}{2}$, the equivalent form to write the pth harmonic are:
+
+$$a_p cos \omega_p t + b_p sin \omega_pt=R_p cos (\omega_p t + \phi_p)$$.
+
+where  $R_p=\sqrt{a_p+b_p}$ and $\phi_p=tan^{-1}(\frac{-b_p}{a_p})$
+
+The plot of $I(\omega) = \frac{N R^2_p}{4\pi}$ against $\omega$ is called the periodogram of time data. Trend will produce a peak at zero frequency, while seasonal variations produces peaks at the seasonal frquency and at integer multiples of the sesaonal frequency. Then, when a periodogram has a large peak at some frequency $\omega$ then related peaks may occurr at $2\omega$, $3\omega$,....(Chaftiel, C,2004)
+
+{\bf Band spectrum regression}
+
+
+Hannan (1963) first proposed regression analysis in the frequency domain,later examining the use of this technique in estimating distributed lag models (Hannan, 1965, 1967). Engle (1974) demonstrated that regression in the frequency domain has certain advantages over regression in the time domain.
+Consider the linear regression model
+\begin{equation}
+    y=X\beta+u
+    \end{equation}
+where X is an n x k matrix of fixed observations on the independent variables, $ \beta $ is a k x I vector of parameters, y is an n x 1 vector of observations on the dependent variable, and u is an n x I vector of disturbance terms each with zero mean and constant variance, $\sigma^2$. 
+
+The model may be expressed in terms of frequencies by applying a finite Fourier transform to the dependent and independent variables.For Harvey (1978) there are a number of reasons for doing this. One is to permit the application of the technique known as 'band spectrum regression', in which regression is carried out in the frequency domain with certain wavelengths omitted. Another reason for interest in spectral regression is that if the disturbances in (3) are serially correlated, being generated by any stationary stochastic process, then regression in the frequency domain will yield an asymptotically efficient estimator of $ \beta $.
+
+
+Engle (1974) compute the full spectrum regression with he complex finite Fourier transform based on the {n x n} matrix $W$, in which element $(t, s)$ is given by
+
+   $ w_{ts}=\frac{1}{\sqrt n} e^{i\lambda_t s}$ , $s= 0,1,...,n-1$
+    
+where $\lambda_t = 2\pi \frac {t}n$, t=0,1,...,n-1, and $i=\sqrt{-1}$.
+
+Pre-multiplying the observations in  observations in (3) by $W$ yields
+\begin{equation}
+    \dot y=\dot X\beta+\dot u
+    \end{equation}
+where $\dot y = Wy$,$ \dot X = WX$, and $ \dot u = Wu$.
+
+If the disturbance vector in (4) obeys the classical assumptions, viz. $E[u] = 0$ and $E[uu']=\sigma^2 I_n$. then the transformed disturbance vector, $\dot u$, will have identical properties. This follows because the matrix W is unitary, i.e., $WW^{T}= I$, where $W^T$ is the transpose of the complex conjugate of W. Furthermore the observations in (4) contain precisely the same amount of information as the untransformed observations in (3).
+
+Application of OLS to (4) yields, in view of the properties of  $\dot u$, the best linear unbiased estimator (BLUE) of $\beta$. This estimator is identical to the OLS estimator in (3), a result which follows directly on taking account of the unitary property of $W$. When the relationship implied by (4) is only assumed to hold for certain frequencies, band spectrum regression is appropriate, and this may be carried out by omitting the observations in (4) corresponding to the remaining frequencies. Since the variables in (4) are complex, however, Engle (1974) suggests an inverse Fourier transform in order to convert everything back into real terms  (Harvey,1974). 
+
+The problems which arise from the use of the complex Fourier transform may be circumvented by carrying out the Fourier transform of the data in real terms. In order to do this the observations in (3) are pre-multiplied by the orthogonal matrix $Z$ whose elements are defined as follows (Harvey,1978):
+
+
+$$z_{ts} = \left\lbrace
+\begin{array}{ll}
+\left(\frac{1}n\right) ^\frac{-1}2 &  t=1\\
+\left(\frac{2}n\right) ^\frac{1}2 \cos\left[\frac{\pi t(s-1)}n\right] & t=2,4,6,..(n-2) \mbox{ or }   (n-1)\\
+\left(\frac{2}n\right) ^\frac{1}2 \sin\left[\frac{\pi (t-1)(s-1)}T\right] & t=3,5,7,.., (n-1)  \mbox{ or }   n\\
+\left (n\right) ^\frac{-1}2 (-1)^{s+1} & t=n \mbox{  if  n  is  even } ,  s=1,...n,
+\end{array}
+\right.$$
+
+
+The resulting frequency domain regression model is:
+
+\begin{equation}
+    y^{**}=X^{**}\beta+v
+\end{equation}
+where $y^{**}=Zy$,$X^{**}=ZX$ and $v=Zu$.
+
+In view of the orthogonality of $Z$,  $E[vv']=\sigma^2 I_n$ when  $E[uu']=\sigma^2 I_n$ and the application of OLS to (5) gives the BLUE of $\beta$.
+
+Since all the elements of y** and X** are real, model may be treated by a standard regression package. If band spectrum regression is to be carried out, the number of rows in y** and X** is reduced accordingly, and so no problems arise from the use of an inappropriate number of degrees of freedom.
+
+
+
+{\bf Amplitude domain-frequency regression}
+
+
+Consider now the linear regression model
+\begin{equation}
+    y_t=\beta_tx_t+u_t
+    \end{equation}
+where $x_t$  is an n x 1 vector of fixed observations on the independent variable, $ \beta_t $ is a n x 1 vector of parameters,$y$ is an n x 1 vector of observations on the dependent
+variable, and  $u_t$  is an n x 1 vector de errores distribuidos con media cero y varianza constante.
+
+Whit the assumption that any series, $y_t$,$x_t$,$\beta_t$ and $ut$, can be transformed into a set of sine and cosine waves such as:
+
+
+
+$$y_t=\eta^y+\sum_{j=1}^N[a^y_j\cos(\omega_j)+b^y_j\sin(\omega_j)$$
+
+$$x_t=\eta^x+\sum_{j=1}^N[a^x_j\cos(\omega_j)+b^x_j\sin(\omega_j)]$$
+
+
+
+
+
+ Pre-multiplying (6) by  $Z$:
+
+
+ $$ \dot y=\dot x\dot\beta+\dot u $$ (7)
+    
+where $\dot y = Zy$,$ \dot x = Zx$, $ \dot \beta = Z\beta$ y  $ \dot u = Zu$
+
+The system (7) can be rewritten as (see appendix):
+
+
+$$ \dot y=Zx_tI_nZ^T\dot \beta + ZI_nZ^T\dot u$$ (8)
+
+
+If we call $ \dot e = ZI_nZ ^ T \dot u $, It can be found  the $ \dot \beta $ that minimize the sum of squared errors $ E_T = Z ^ T \dot e $.
+
+
+Once you have found the solution to this optimization, the series would be transformed into the time domain.
+
+{\bf  Example: Regression in frequency domain into the GDP and emploiment in Canada }
+
+The function transforms the time series in amplitude-frequency domain, order the fourier coefficient by the comun frequencies in cross-spectrum, make a band spectrum regresion of the serie $y_t$ and $x_t$ for every set of fourier coefficients, and select the model to pass the significance bands to periodogram cumulative (Venables and Ripley,2002).
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(descomponer)}
+\hlkwd{data}\hlstd{(PIB)}
+\hlkwd{data} \hlstd{(celec)}
+\hlkwd{rdf}\hlstd{(celec,PIB)}
+\end{alltt}
+\begin{verbatim}
+## $datos
+##        Y         X        F        res
+## 1  12458  65.72689 12438.74   19.26350
+## 2  12822  67.48491 12909.66  -87.65586
+## 3  13345  69.97484 13576.63 -231.63133
+## 4  14288  72.98793 14383.75  -95.74524
+## 5  15309  76.26133 15260.59   48.41183
+## 6  16207  80.29488 16341.05 -134.05185
+## 7  17290  83.50754 17201.62   88.37559
+## 8  17805  85.91239 17845.81  -40.80958
+## 9  19037  88.65090 18579.37  457.62803
+## 10 19915  91.45826 19331.38  583.62284
+## 11 20867  94.86328 20243.48  623.52297
+## 12 21543  98.82299 21304.16  238.83875
+## 13 21935 102.54758 22301.86 -366.86407
+## 14 22253 103.69194 22608.40 -355.40283
+## 15 21757  99.98619 21615.75  141.25334
+## 16 22409 100.00000 21619.45  789.55406
+## 17 20636  99.38237 21454.00 -818.00190
+## 18 20663  97.30654 20897.95 -234.95105
+## 19 19952  96.10971 20577.36 -625.35719
+## 
+## $Fregresores
+##     1           2
+## X1  1 88.15634053
+## X2  0 -5.68444051
+## X3  0 -9.44842574
+## X4  0 -2.21612456
+## X5  0 -2.62417102
+## X6  0 -0.79654010
+## X7  0 -2.39713050
+## X8  0 -1.53918705
+## X9  0 -1.43696347
+## X10 0 -1.18967332
+## X11 0 -0.69982435
+## X12 0 -0.92147295
+## X13 0 -0.82056751
+## X14 0 -1.14883279
+## X15 0 -0.66396550
+## X16 0 -1.26963280
+## X17 0 -0.21300734
+## X18 0 -1.09411248
+## X19 0 -0.01302282
+## 
+## $Tregresores
+##               1        2
+##  [1,] 0.2294157 15.07878
+##  [2,] 0.2294157 15.48210
+##  [3,] 0.2294157 16.05333
+##  [4,] 0.2294157 16.74458
+##  [5,] 0.2294157 17.49555
+##  [6,] 0.2294157 18.42091
+##  [7,] 0.2294157 19.15794
+##  [8,] 0.2294157 19.70965
+##  [9,] 0.2294157 20.33791
+## [10,] 0.2294157 20.98196
+## [11,] 0.2294157 21.76313
+## [12,] 0.2294157 22.67155
+## [13,] 0.2294157 23.52603
+## [14,] 0.2294157 23.78856
+## [15,] 0.2294157 22.93841
+## [16,] 0.2294157 22.94157
+## [17,] 0.2294157 22.79988
+## [18,] 0.2294157 22.32365
+## [19,] 0.2294157 22.04908
+## 
+## $Nregresores
+## [1] 2
+## 
+## $sse
+## [1] 3116177
+## 
+## $gcv
+## [1] 204869.8
+\end{verbatim}
+\begin{alltt}
+\hlkwd{gtd}\hlstd{(}\hlkwd{rdf}\hlstd{(celec,PIB)}\hlopt{$}\hlstd{datos}\hlopt{$}\hlstd{res)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/rdf-1} 
+
+\end{knitrout}
+
+Make the forecast  $Y_t(h)=\beta_0+\beta_1X_t(h)+....$, you need to have the expansion for $X_t(h)$ of the development 
+
+\begin{equation}
+    X_t(h)=\eta+\sum_{j=1}^N[a_j\cos(\omega_j)+b_j\sin(\omega_j)]
+    \end{equation}
+
+and this development using the orthogonal transformations $W$ to have regressors in the frequency and time domain has to be done with $n$ observations. Therefore, we have to build a new base of regressors of size $n$ that have to be elaborated with observations $X_t$, being now $t=h,h+1,h+2, ...... ,n,n+1,n+2, ....,n+h$.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mod1}\hlkwb{=}\hlkwd{rdf}\hlstd{(celec,PIB)}
+\hlstd{newdata}\hlkwb{=}\hlkwd{c}\hlstd{(}\hlnum{100}\hlstd{)}
+\hlkwd{predecirdf}\hlstd{(mod1,newdata)}
+\end{alltt}
+\begin{verbatim}
+##      fit      lwr      upr 
+## 20577.36 19641.02 21513.70
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+ {\bf Seasonal Decomposition by the Fourier Coefficients}
+
+The amplitude domain-frequency regression  method could be use to decompose a time series into seasonal, trend and irregular components of a time serie $y_t$ of frequency $b$ or number of times in each unit time interval. For example, one could use a value of 7 for frequency when the data are sampled daily, and the natural time period is a week, or 4 and 12 when the data are sampled quarterly and monthly and the natural time period is a year.
+
+If the observation are teken at equal interval of length, $\bigtriangleup t$, then the angular frequency is $\omega=frac{\pi}{\bigtriangleup t}$. The equivalent frequency expressed in cycles per unit time is $f=\frac{\omega}{2\pi}=\frac{1}{2} \bigtriangleup t$. Whit only one observation per year, $\omega=\pi$ radians per year or $f=\frac{1}{2}$ cycle per year (1 cicle per two years), variation whit a wavelength of one year has fequency $\omega=2\pi$ radians per year or $f=1$ cicle per year.
+
+For example, in a monthly time serie of $N=100$ observation, the seasonal cycles or the wavelenghth of one year has frequency $f= \frac{100}{12}=8,33$ cycles for 100 dates. If the time serie are 8 full year, the less seasonal frequency are 1 cycle for year, or 8 cycle for 96 observation. The integer multiplies are  $2 \frac{N}{12}$,$3 \frac{N}{12}$...., and  wavelenghth low of one year has frequency are $f<\frac{N}{12}$.
+
+We can use (8) to estimate the fourier coefficient in time serie $y_t$:
+
+$$\dot y=Z t I_nZ^T\dot \beta + ZI_nZ^T\dot u$$ (9)
+
+being $t=(1,1,....1)_N$ or $t=(1,2,3,...,N)_N$.
+
+If $t=(1,1,1,....1)_N$ , 
+$$A=Z t I_nZ^T=\left(
+\begin{array}{cccccccc}
+1& 0& 0& 0 & 0 & . & 0& 0 \\
+0& 1& 0& 0 & 0 & . & 0& 0 \\
+0& 0& 1& 0 & 0 & . & 0& 0 \\
+0& 0& 0& 1 & 0 & .& 0& 0 \\
+0& 0& 0& 0 & 1 & . & 0& 0 \\
+.& .& .& . & . & .& .& . \\
+0& 0& 0& 0 & 0 & . & 0& 1 \\
+\end{array}
+\right)$$ 
+
+Then $$A=\left(
+\begin{array}{cccccccc}
+1& 0& 0& 0 & 0 & . & 0& 0 \\
+0& 1& 0& 0 & 0 & . & 0& 0 \\
+0& 0& 1& 0 & 0 & . & 0& 0 \\
+0& 0& 0& 1 & 0 & .& 0& 0 \\
+0& 0& 0& 0 & 0 & . & 0& 0 \\
+.& .& .& . & . & .& .& . \\
+0& 0& 0& 0 & 0 & . & 0& 0 \\
+\end{array}
+\right) $$
+
+are use in (9) to make the  regression band spectrum with the first four coefficient of fourier of the serie $\dot y$.
+
+The  first$2\frac{N}{12}-1$ rows the A matrix are used to estimate the fourier coefficients corresponding to cycles of low frequency, trend cycles, and rows $2 \frac{N}{12}$ and $2 \frac{N}{12}+1$ are used to  estimate the fourier coefficients of 1 cicle for year.  The integer multiplies re the rows   $6 \frac{N}{12}$, $6 \frac{N}{12}+1$, $8 \frac{N}{12}$...should be used to obtain the seasonal frequency.
+
+{\bf  Example:descomponse by amplitude domain-frequency regression.  IPI base 2009  in Cantabria}
+
+The Industrial Price Index of Cantabria is presented in the table below
+
+The time serie by trend an seasonal is named $TDST$.  $TD$ is calculate by band spectrum regresion of the serie $y_ t$ and the temporal index $t$, in which regression is carried out in low amplitude- frequency. The seasonal serie $ST$ result to take away $TD$ to $TDST$ , and the irregular serie $IR$ result to take away $TDST$  to $y_t$ . The temporal index $t$ used in the exemple are the OLS regression into IPI and the trend index $t=(1,2,3,....N)_N$. 
+
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{data}\hlstd{(ipi)}
+\hlkwd{descomponer}\hlstd{(ipi,}\hlnum{12}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{$}\hlstd{datos}
+\end{alltt}
+\begin{verbatim}
+##         y      TDST        TD          ST           IR
+## 1    90.2  93.49148  97.29581  -3.8043288  -3.29147706
+## 2    98.8  96.76618  97.40651  -0.6403355   2.03382281
+## 3    92.1 105.16011  97.55957   7.6005392 -13.06010720
+## 4   102.7 100.11383  97.73672   2.3771122   2.58616508
+## 5   107.0 105.36545  97.91825   7.4471960   1.63455301
+## 6    98.3 102.67619  98.08444   4.5917463  -4.37619107
+## 7   100.9  99.14371  98.21717   0.9265446   1.75628888
+## 8    66.3  72.41965  98.30134 -25.8816898  -6.11964836
+## 9   101.4 100.48346  98.32624   2.1572165   0.91654243
+## 10  111.8 107.36550  98.28651   9.0789861   4.43450007
+## 11  111.4 105.66091  98.18276   7.4781476   5.73909316
+## 12   85.2  86.24833  98.02170 -11.7733676  -1.04832922
+## 13   94.4  94.02740  97.81584  -3.7884330   0.37259602
+## 14   96.2  96.94503  97.58269  -0.6376590  -0.74503016
+## 15  106.5 104.91231  97.34356   7.5687593   1.58768510
+## 16  101.1  99.48917  97.12200   2.3671694   1.61083240
+## 17  103.5 104.35813  96.94209   7.4160356  -0.85812832
+## 18   99.9 101.39913  96.82661   4.5725269  -1.49913452
+## 19  101.4  97.71791  96.79525   0.9226651   3.68208654
+## 20   58.6  71.08983  96.86311 -25.7732827 -12.48982901
+## 21   99.8  99.18765  97.03947   2.1481777   0.61234851
+## 22  112.7 106.36795  97.32701   9.0409316   6.33205472
+## 23  103.8 105.16833  97.72154   7.4467921  -1.36833257
+## 24   89.0  86.48826  98.21225 -11.7239851   2.51173577
+## 25   91.2  95.00995  98.78249  -3.7725372  -3.80995442
+## 26   97.3  98.77602  99.41100  -0.6349825  -1.47601811
+## 27  110.2 107.61046 100.07348   7.5369794   2.58954158
+## 28  105.7 103.10165 100.74442   2.3572266   2.59835269
+## 29  109.9 108.78390 101.39902   7.3848751   1.11610157
+## 30  109.1 106.56835 102.01504   4.5533075   2.53165476
+## 31  104.3 103.49319 102.57441   0.9187856   0.80680894
+## 32   71.9  77.39968 103.06455 -25.6648756  -5.49967709
+## 33  107.1 105.61838 103.47924   2.1391389   1.48162425
+## 34  108.5 112.82176 103.81888   9.0028771  -4.32175586
+## 35  116.6 111.50579 104.09036   7.4154366   5.09420740
+## 36   96.5  92.63167 104.30628 -11.6746027   3.86832534
+## 37   94.1 100.72716 104.48380  -3.7566413  -6.62715880
+## 38  102.4 104.01079 104.64309  -0.6323060  -1.61078761
+## 39  109.4 112.31078 104.80558   7.5051995  -2.91077599
+## 40  109.0 107.33936 104.99208   2.3472838   1.66063840
+## 41  113.3 112.57479 105.22108   7.3537147   0.72520870
+## 42  116.5 110.04125 105.50717   4.5340881   6.45874503
+## 43  107.9 106.77478 105.85988   0.9149060   1.12521823
+## 44   76.7  80.72646 106.28293 -25.5564685  -4.02646394
+## 45  111.0 108.90415 106.77405   2.1301001   2.09585363
+## 46  109.3 116.29003 107.32521   8.9648227  -6.99002963
+## 47  119.5 115.30756 107.92348   7.3840810   4.19244058
+## 48   95.1  96.92699 108.55221 -11.6252202  -1.82698928
+## 49  109.6 105.45181 109.19255  -3.7407455   4.14819131
+## 50  109.0 109.19553 109.82516  -0.6296296  -0.19553175
+## 51  125.2 117.90530 110.43188   7.4734196   7.29469750
+## 52  104.8 113.33469 110.99734   2.3373410  -8.53468571
+## 53  123.7 118.83279 111.51024   7.3225543   4.86720973
+## 54  119.7 116.47907 111.96420   4.5148687   3.22093379
+## 55  105.4 113.26925 112.35822   0.9110265  -7.86924913
+## 56   84.1  87.24847 112.69653 -25.4480614  -3.14846658
+## 57  112.1 115.10896 112.98790   2.1210613  -3.00895781
+## 58  121.6 122.17131 113.24454   8.9267682  -0.57131077
+## 59  120.0 120.83332 113.48059   7.3527255  -0.83331896
+## 60   98.6 102.13448 113.71031 -11.5758378  -3.53447654
+## 61  117.6 110.22138 113.94623  -3.7248497   7.37861665
+## 62  117.7 113.57038 114.19733  -0.6269531   4.12962237
+## 63  129.7 121.90910 114.46747   7.4416398   7.79089518
+## 64  111.8 117.08157 114.75418   2.3273982  -5.28157443
+## 65  125.2 122.33939 115.04800   7.2913939   2.86060751
+## 66  121.2 119.82801 115.33236   4.4956493   1.37198834
+## 67  116.8 116.49127 115.58412   0.9071470   0.30873208
+## 68   88.2  90.43504 115.77469 -25.3396543  -2.23503871
+## 69  113.7 117.98378 115.87175   2.1120225  -4.28377603
+## 70  129.0 124.73008 115.84137   8.8887137   4.26992094
+## 71  121.7 122.97177 115.65040   7.3213700  -1.27177389
+## 72   94.4 103.74264 115.26910 -11.5264553  -9.34264377
+## 73  110.3 110.96455 114.67351  -3.7089538  -0.66455342
+## 74  115.3 113.22345 113.84773  -0.6242766   2.07655123
+## 75  112.9 120.19554 112.78568   7.4098599  -7.29553587
+## 76  122.4 113.80977 111.49232   2.3174554   8.59022509
+## 77  116.9 117.24442 109.98419   7.2602334  -0.34442458
+## 78  111.2 112.76564 108.28921   4.4764299  -1.56563785
+## 79  115.0 107.34901 106.44574   0.9032674   7.65098972
+## 80   77.1  79.26977 104.50102 -25.2312472  -2.16976916
+## 81  106.3 104.61189 102.50890   2.1029837   1.68811145
+## 82  115.9 109.37796 100.52731   8.8506592   6.52203544
+## 83  106.7 105.90524  98.61523   7.2900144   0.79475657
+## 84   83.0  85.35274  96.82981 -11.4770729  -2.35273788
+## 85   92.2  91.53037  95.22343  -3.6930580   0.66962853
+## 86   94.3  93.21952  93.84112  -0.6216001   1.08048013
+## 87   96.7 100.09652  92.71844   7.3780800  -3.39651790
+## 88   87.2  94.18741  91.87990   2.3075126  -6.98741330
+## 89   91.0  98.56716  91.33809   7.2290730  -7.56716185
+## 90   91.0  95.55065  91.09344   4.4572105  -4.55065228
+## 91   95.3  92.03412  91.13474   0.8993879   3.26587643
+## 92   70.2  66.31734  91.44018 -25.1228401   3.88265582
+## 93   98.3  94.07301  91.97906   2.0939449   4.22699051
+## 94  106.9 101.52634  92.71374   8.8126048   5.37365804
+## 95  103.4 100.86057  93.60191   7.2586589   2.53942747
+## 96   86.8  83.17132  94.59901 -11.4276905   3.62867995
+## 97   90.5  91.98328  95.66044  -3.6771622  -1.48327720
+## 98   91.4  96.12477  96.74369  -0.6189236  -4.72476795
+## 99  107.7 105.15641  97.81010   7.3463001   2.54359493
+## 100 100.6 101.12380  98.82623   2.2975698  -0.52379809
+## 101 101.9 106.96265  99.76474   7.1979126  -5.06264944
+## 102 105.8 105.04288 100.60489   4.4379911   0.75712158
+## 103 101.5 102.22804 101.33254   0.8955084  -0.72804413
+## 104  75.4  76.92534 101.93977 -25.0144330  -1.52533899
+## 105 101.4 104.50915 102.42425   2.0849062  -3.10915268
+## 106 109.1 111.56283 102.78828   8.7745503  -2.46283178
+## 107 115.8 110.26517 103.03786   7.2273034   5.53483418
+## 108  98.9  91.80330 103.18160 -11.3783080   7.09670316
+## 109  97.6  99.56851 103.22978  -3.6612663  -1.96851275
+## 110 102.7 102.57721 103.19346  -0.6162472   0.12278761
+## 111 113.2 110.39836 103.08384   7.3145202   2.80163645
+## 112 104.3 105.19939 102.91176   2.2876270  -0.89938650
+## 113 107.6 109.85412 102.68737   7.1667522  -2.25412104
+## 114 103.5 106.83880 102.42003   4.4187717  -3.33880379
+## 115  97.9 103.00994 102.11831   0.8916288  -5.10993901
+## 116  86.3  76.88402 101.79005 -24.9060259   9.41597537
+## 117 108.4 103.51838 101.44251   2.0758674   4.88162432
+## 118 103.5 109.81895 101.08246   8.7364958  -6.31895228
+## 119 103.5 107.91219 100.71625   7.1959478  -4.41219319
+## 120  89.0  89.02086 100.34979 -11.3289256  -0.02086087
+## 121  94.5  96.34308  99.98845  -3.6453705  -1.84307991
+## 122  97.7  99.02332  99.63689  -0.6135707  -1.32331522
+## 123 112.9 106.58152  99.29878   7.2827404   6.31847874
+## 124  97.6 101.25429  98.97660   2.2776842  -3.65428531
+## 125 111.6 105.80694  98.67135   7.1355917   5.79306067
+## 126 103.8 102.78193  98.38238   4.3995523   1.01806936
+## 127  97.3  98.99509  98.10734   0.8877493  -1.69508506
+## 128  86.6  73.04459  97.84221 -24.7976188  13.55540629
+## 129  94.7  99.64840  97.58158   2.0668286  -4.94840385
+## 130 100.3 106.01739  97.31895   8.6984413  -5.71739065
+## 131  95.4 104.21194  97.04735   7.1645923  -8.81193975
+## 132  85.4  85.48037  96.75991 -11.2795431  -0.08036676
+## 133  96.3  92.82113  96.45061  -3.6294747   3.47886911
+## 134  94.5  95.50404  96.11493  -0.6108942  -1.00403907
+## 135  98.1 103.00152  95.75056   7.2509605  -4.90151667
+## 136 105.0  97.62554  95.35780   2.2677414   7.37445589
+## 137 101.0 102.04441  94.93997   7.1044313  -1.04440606
+## 138  98.8  98.88375  94.50342   4.3803329  -0.08375036
+## 139  91.5  94.94119  94.05732   0.8838697  -3.44119438
+## 140  80.5  68.92406  93.61328 -24.6892117  11.57593655
+## 141  94.6  95.24231  93.18452   2.0577898  -0.64231218
+## 142 100.6 101.44547  92.78508   8.6603868  -0.84546802
+## 143  91.8  99.56192  92.42868   7.1332368  -7.76191538
+## 144  82.1  80.89749  92.12765 -11.2301607   1.20250882
+## 145  91.8  88.08756  91.89189  -3.8043288   3.71244372
+## 146  92.6  91.08754  91.72788  -0.6403355   1.51245564
+## 147 100.1  99.23859  91.63805   7.6005392   0.86141476
+## 148  95.4  93.99740  91.62029   2.3771122   1.40259993
+\end{verbatim}
+\begin{alltt}
+\hlkwd{gdescomponer}\hlstd{(ipi,}\hlnum{12}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2002}\hlstd{,}\hlnum{1}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/descomponer-1} 
+
+\end{knitrout}
+
+
+{\bf Bibliography }
+
+Chatfield, Cris (2004). "The Analysis of Time Series: An Introduction (6th edn.)", 2004. CRC Press
+
+Engle, Robert F. (1974), "Band Spectrum Regression", International Economic Review 15,1-11.
+
+Hannan, E.J. (1963), "Regression for Time Series", in Rosenblatt, M. (ed.), Time Series Analysis, New York, John Wiley.
+
+Harvey, A.C. (1978), "Linear Regression in the Frequency Domain", International Economic Review, 19, 507-512.
+
+Venables and Ripley (2002), "Modern Applied Statistics with S" (4th edition, 2002).
+
+Wilson, P.J. and  Perry, L.J. (2004). "Forecasting Australian Unemployment Rates Using Spectral Analysis" Australian Jurnal of Labour Economics, vol 7,no 4, December 2004, pp 459-480.
+ \newpage
+{\bf Appendix}
+
+The multiplication of two harmonic series of diferent frequency:
+
+$$   [a_j\cos (\omega_j)+b_j\sin (\omega_j)]x [a_i\cos (\omega_i)+b_i\sin (\omega_i)]$$
+gives the following sum:
+
+$$   a_ja_i\cos(\omega_j)\cos(\ omega_i)+a_jb_i\cos (\omega_j)\sin (\omega_i)$$
+
+$$+a_ib_j\sin (\omega_j)\cos (\omega_i)b_i\sin (\omega_i)+b_jb_i\sin(\omega_j)\sin(\omega_i)$$
+
+that using the identity of the products of sines and cosines gives the following results:
+
+$$ \frac{a_ja_i+b_jb_i}{2}\cos(\omega_j- \omega_i)+ \frac{b_ja_i-b_ja_i}{2}\sin(\omega_j- \omega_i)$$
+
+$$+\frac{a_ja_i-b_jb_i}{2}\cos(\omega_j+ \omega_i)++ \frac{b_ja_i+b_ja_i}{2}\sin(\omega_j+ \omega_i)$$
+ 
+The circularity of $\omega $ determines that the product of two harmonics series resulting in a new series in which the Fourier coefficients it's a linear combination of the Fourier coefficients of the two harmonics series.
+
+In the following two series:
+
+$$ y_t=\eta^y+a_0^y\cos(\omega_0)+b_0^y\sin(\omega_0)+a_1^y\cos(\omega_1)+b_1^y\sin(\omega_1)+ a_2^y\cos(\omega_2)+b_2^y\sin(\omega_2)+a_3^y\cos(\omega_3)$$
+
+$$ x_t=\eta^x+a_0^x\cos(\omega_0)+b_0^x\sin(\omega_0)+a_1^x\cos(\omega_1)+b_1^x\sin(\omega_1)+ a_2^x\cos(\omega_2)+b_2^x\sin(\omega_2)+a_3^x\cos(\omega_3)$$
+
+given a matrix $\Theta^{\dot x\dot x}$  of size 8x8 :
+
+
+$$\Theta^{\dot x\dot x} = \eta^x I_8+\frac{1}2\left(
+\begin{array}{cccccccc}
+0& a_0^x& b_0^x & a_1^x & b_1^x & a_2^x & b_2^x& 2a_3^x \\
+2a_0^x& a_1^x& b_1^x & a_0^x+a_2^x & b_0^x+b_2^x & a_1^x+2a_3^x & b_1^x& 2a_2^x \\
+2b_0^x& b_1^x&- a_1^x & -b_0^x+b_2^x & a_0^x-a_2^x &- b_1^x &a_1^x- a_3^x &- 2b_2^x \\
+2a_1^x& a_0^x+a_2^x&- b_0^x+b_2^x & 2a_3^x &0 & a_0^x+a_2^x & b_0^x-b_2^x& 2a_1^x \\
+2b_1^x& a_0^x+b_2^x&- b_0^x-a_2^x &0& -2a_3^x & -b_0^x+b_2^x & a_0^x-a_2^x& -2b_1^x \\
+2a_2^x& a_1^x+2a_3^x&- b_1^x & a_0^x+a_2^x &-b_0^x-b_2^x & a_1^x &- b_1^x& 2a_0^x \\
+2b_2^x& b_1^x& a_1^x-2a_3^x & b_0^x-b_2^x &a_0^x-a_2^x & -b_1^x &- a_1^x& -2b_0^x \\
+2a_3^x& a_2^x& -b_2^x & a_1^x &- b_1^x & a_0^x & -b_0^x&  0 
+\end{array}
+\right)$$
+
+
+
+Demonstrates that:
+
+$$\dot z=\Theta^{\dot x\dot x}\dot y$$
+    
+where $\dot y = Wy$,$ \dot x = Wx$, and $ \dot z = Wz$.
+
+
+$$z_t = x_t y_t = W^T\dot x W^T\dot y = W^T Wx_t W^T\dot y = x_t I_n W^T\dot y$$
+
+$$W^T\dot z=x_t I_n W^T\dot y$$
+
+$$\dot z=W^Tx_tI_nW\dot y$$
+
+It is true that;
+
+$$x_tI_n=W^T\Theta^{\dot x\dot x}W$$
+
+and
+
+$$\Theta^{\dot x\dot x}=W^Tx_tI_nW$$
+ 
+ 
+\end{document}
